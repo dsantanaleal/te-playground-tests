@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'com.dsantanaleal.teplayground'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+allure {
+    version = '2.21.0'
+    autoconfigure = true
+    aspectjweaver = true
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.38'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+    implementation 'com.google.inject:guice:7.0.0'
+    implementation 'com.microsoft.playwright:playwright:1.51.0'
+
+    testImplementation 'org.testng:testng:7.9.0'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
+    testImplementation 'io.qameta.allure:allure-testng:2.21.0'
+}
+
+test {
+    useTestNG()
+}
+
+tasks.register('playwrightInstallBrowsers', JavaExec) {
+    group = 'playwright'
+    description = 'Installs the Playwright browsers with dependencies.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass.set('com.microsoft.playwright.CLI')
+    args = ['install', '--with-deps']
+}

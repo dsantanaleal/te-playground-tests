@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="Login Tests" verbose="1">
+    <test name="Login Test Suite">
+        <classes>
+            <class name="com.dsantanaleal.teplayground.tests.LoginTests"/>
+        </classes>
+    </test>
+</suite>
